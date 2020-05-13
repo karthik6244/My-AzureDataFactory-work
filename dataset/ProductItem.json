@@ -1,0 +1,32 @@
+{
+	"name": "ProductItem",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ProductsLinkedService",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ProductItem",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ProductId",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ProductItem"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

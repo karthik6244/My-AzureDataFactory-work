@@ -1,0 +1,27 @@
+{
+	"name": "ParametererizedDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ParameterizedLinkedService",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"ServerNameParameter": {
+					"value": "@dataset().DataSetParam",
+					"type": "Expression"
+				}
+			}
+		},
+		"parameters": {
+			"DataSetParam": {
+				"type": "String"
+			}
+		},
+		"folder": {
+			"name": "Ram DataSets"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "OnPremFile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "OnPremises File",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ram DataSets"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation",
+				"fileName": "03-30-2020.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

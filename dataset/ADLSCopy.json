@@ -1,0 +1,26 @@
+{
+	"name": "ADLSCopy",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Azure ADLS Storage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ram DataSets"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileSystem": "newblobcontainer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

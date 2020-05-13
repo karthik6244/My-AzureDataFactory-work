@@ -1,0 +1,6 @@
+{
+	"name": "NeudesicSelfHostedIR",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

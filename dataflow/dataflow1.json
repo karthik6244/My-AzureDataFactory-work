@@ -1,0 +1,42 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DataFlowSequel",
+						"type": "DatasetReference"
+					},
+					"name": "PullFromSequel"
+				},
+				{
+					"dataset": {
+						"referenceName": "ProductItem",
+						"type": "DatasetReference"
+					},
+					"name": "ProductItemSource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SelectToADLS",
+						"type": "DatasetReference"
+					},
+					"name": "SendToADLS"
+				}
+			],
+			"transformations": [
+				{
+					"name": "LookUpProductItem"
+				},
+				{
+					"name": "SelectColumns"
+				}
+			],
+			"script": "source(output(\n\t\tId as integer,\n\t\tName as string,\n\t\tType as string,\n\t\tPrice as double\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> PullFromSequel\nsource(output(\n\t\tId as integer,\n\t\tProductItem as string,\n\t\tProductId as integer\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> ProductItemSource\nProductItemSource, PullFromSequel lookup(ProductId == PullFromSequel@Id,\n\tmultiple: false,\n\tpickup: 'any',\n\tbroadcast: 'auto')~> LookUpProductItem\nLookUpProductItem select(mapColumn(\n\t\tProductItem,\n\t\tId = {PullFromSequel@Id},\n\t\tName,\n\t\tType,\n\t\tPrice\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SelectColumns\nSelectColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> SendToADLS"
+		}
+	}
+}

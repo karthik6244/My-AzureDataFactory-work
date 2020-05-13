@@ -1,0 +1,50 @@
+{
+	"name": "CovidFiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "NeudesicOnPremisesCovid",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ram DataSets"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "FileServerLocation"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Province/State",
+				"type": "String"
+			},
+			{
+				"name": "Country/Region",
+				"type": "String"
+			},
+			{
+				"name": "Last Update",
+				"type": "String"
+			},
+			{
+				"name": "Confirmed",
+				"type": "String"
+			},
+			{
+				"name": "Deaths",
+				"type": "String"
+			},
+			{
+				"name": "Recovered",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

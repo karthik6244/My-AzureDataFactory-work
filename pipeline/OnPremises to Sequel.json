@@ -1,0 +1,211 @@
+{
+	"name": "OnPremises to Sequel",
+	"properties": {
+		"activities": [
+			{
+				"name": "OnPremises Covid FIles",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "FileServerReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink"
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "FIPS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FIPS",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Admin2",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Admin2",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Province_State",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Province_State",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Country_Region",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Country_Region",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Last_Update",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Last_Update",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "Lat",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Latitude",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Long_",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Longitude",
+									"type": "Decimal"
+								}
+							},
+							{
+								"source": {
+									"name": "Confirmed",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ConfirmedPeople",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Deaths",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Deaths",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Recovered",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Recovered",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Active",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Active",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"name": "Combined_Key",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Combined_Key",
+									"type": "String"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "CovidFiles",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSequel",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Send Mail",
+				"type": "AzureFunctionActivity",
+				"dependsOn": [
+					{
+						"activity": "OnPremises Covid FIles",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"functionName": "ADFOutput",
+					"method": "POST",
+					"body": {
+						"name": "Azure"
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "MailFunction",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "Ram Pipelines"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

@@ -1,0 +1,29 @@
+{
+	"name": "Invoke Web Request",
+	"properties": {
+		"activities": [
+			{
+				"name": "InvokeAPI",
+				"type": "WebHook",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://prod-02.centralus.logic.azure.com:443/workflows/d73e15dae3644b48924c95aaf920e96b/triggers/manual/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=B4RZhAYNJTJy_7mr-x4MQTaIXiOj0u5dEn1z05do56k",
+					"method": "POST",
+					"body": {
+						"name": "Karthik",
+						"salary": "786",
+						"age": "39",
+						"CallBackUri": "http://dummy.restapiexample.com/api/v1/create"
+					},
+					"timeout": "00:10:00"
+				}
+			}
+		],
+		"folder": {
+			"name": "Ram Pipelines"
+		},
+		"annotations": []
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

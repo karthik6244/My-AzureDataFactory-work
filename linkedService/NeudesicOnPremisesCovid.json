@@ -1,0 +1,17 @@
+{
+	"name": "NeudesicOnPremisesCovid",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "FileServer",
+		"typeProperties": {
+			"host": "C:\\Users\\siva.kunapuli\\Documents\\Deloitte\\COVID-19-master\\csse_covid_19_data\\csse_covid_19_daily_reports",
+			"userId": "CORP\\Siva.Kunapuli",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlYmM3ZjQ0My05OGE0LTRhZTgtYTU2My00ZGFhNTkxNWZmZWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "NeudesicSelfHostedIR",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

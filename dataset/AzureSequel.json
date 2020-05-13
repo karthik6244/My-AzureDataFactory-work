@@ -1,0 +1,85 @@
+{
+	"name": "AzureSequel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "CovidSequel",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Ram DataSets"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FIPS",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Admin2",
+				"type": "varchar"
+			},
+			{
+				"name": "Province_State",
+				"type": "varchar"
+			},
+			{
+				"name": "Country_Region",
+				"type": "varchar"
+			},
+			{
+				"name": "Last_Update",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Latitude",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "Longitude",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 0
+			},
+			{
+				"name": "ConfirmedPeople",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Deaths",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Recovered",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Active",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Combined_Key",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CovidDailyFeed"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
